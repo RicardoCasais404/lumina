@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/*
+  Na v4, o @import "tailwindcss" já inclui tudo (base, components, utilities).
+  É muito mais limpo!
+*/
+
+body {
+  background-color: #000; /* Fundo preto */
+  color: #fff; /* Texto branco */
+}
