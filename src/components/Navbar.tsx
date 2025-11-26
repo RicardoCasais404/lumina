@@ -11,7 +11,7 @@ export default function Navbar() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Bloquear o scroll da página quando o menu está aberto (para não deslizar o fundo)
+  // Bloquear o scroll da página quando o menu está aberto
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -21,68 +21,88 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   return (
-    <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-black/50 backdrop-blur-md">
-      {/* BARRA SUPERIOR (Sempre visível) */}
-      <div className="flex items-center justify-between p-6 px-6 md:px-10 relative z-50">
-        {/* LOGÓTIPO */}
-        <Link
-          href="/"
-          className="text-xl md:text-2xl font-bold tracking-widest text-white"
-        >
-          LUMINA
-        </Link>
+    <>
+      {/* 1. BARRA DE NAVEGAÇÃO (A que está sempre visível) */}
+      <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-black/50 backdrop-blur-md">
+        <div className="flex items-center justify-between p-6 px-6 md:px-10">
+          {/* LOGÓTIPO */}
+          <Link
+            href="/"
+            className="text-xl md:text-2xl font-bold tracking-widest text-white"
+          >
+            LUMINA
+          </Link>
 
-        {/* MENU PC (Escondido em telemóvel) */}
-        <div className="hidden md:flex gap-8 text-sm font-medium text-gray-300">
-          <Link href="/catalog" className="hover:text-white transition-colors">
-            CATÁLOGO
-          </Link>
-          <Link href="/about" className="hover:text-white transition-colors">
-            SOBRE
-          </Link>
-          <Link href="/cart" className="hover:text-white transition-colors">
-            CARRINHO (<span suppressHydrationWarning>{totalItems}</span>)
-          </Link>
+          {/* MENU PC (Links normais) */}
+          <div className="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+            <Link
+              href="/catalog"
+              className="hover:text-white transition-colors"
+            >
+              CATÁLOGO
+            </Link>
+            <Link href="/about" className="hover:text-white transition-colors">
+              SOBRE
+            </Link>
+            <Link href="/cart" className="hover:text-white transition-colors">
+              CARRINHO (<span suppressHydrationWarning>{totalItems}</span>)
+            </Link>
+          </div>
+
+          {/* BOTÃO HAMBÚRGUER (Só aparece se o menu estiver FECHADO) */}
+          <div className="md:hidden">
+            {!isMobileMenuOpen && (
+              <button
+                className="text-white"
+                onClick={() => setIsMobileMenuOpen(true)}
+              >
+                <Menu size={28} />
+              </button>
+            )}
+          </div>
         </div>
+      </nav>
 
-        {/* BOTÃO HAMBÚRGUER (Só telemóvel) */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* MENU MÓVEL (OVERLAY) */}
-      {/* Fica com z-40 para ficar DEBAIXO do botão X (z-50) mas EM CIMA do site */}
+      {/* 2. O MENU MÓVEL (Painel Gigante que cobre TUDO) */}
+      {/* Este bloco está FORA da <nav> visual para não haver conflitos */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black z-40 flex flex-col items-center justify-center space-y-10 animate-in fade-in duration-200 pt-20">
-          <Link
-            href="/catalog"
-            className="text-base font-light tracking-[0.2em] uppercase text-white hover:text-gray-400 transition-colors"
+        <div className="fixed inset-0 bg-black z-100 flex flex-col items-center justify-center animate-in fade-in duration-200">
+          {/* Botão de Fechar (No canto superior direito deste painel preto) */}
+          <button
+            className="absolute top-6 right-6 text-white p-2"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Catálogo
-          </Link>
+            <X size={32} />
+          </button>
 
-          <Link
-            href="/about"
-            className="text-base font-light tracking-[0.2em] uppercase text-white hover:text-gray-400 transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Sobre
-          </Link>
+          {/* LINKS DO MENU */}
+          <div className="flex flex-col items-center space-y-12">
+            <Link
+              href="/catalog"
+              className="text-2xl font-light tracking-[0.2em] text-white hover:text-gray-400"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              CATÁLOGO
+            </Link>
 
-          <Link
-            href="/cart"
-            className="text-base font-light tracking-[0.2em] uppercase text-white hover:text-gray-400 transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Carrinho ({totalItems})
-          </Link>
+            <Link
+              href="/about"
+              className="text-2xl font-light tracking-[0.2em] text-white hover:text-gray-400"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              SOBRE
+            </Link>
+
+            <Link
+              href="/cart"
+              className="text-2xl font-light tracking-[0.2em] text-white hover:text-gray-400"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              CARRINHO ({totalItems})
+            </Link>
+          </div>
         </div>
       )}
-    </nav>
+    </>
   );
 }
