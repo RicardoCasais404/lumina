@@ -46,18 +46,35 @@ export default function Navbar() {
 
         {/* MENU MÓVEL (OVERLAY) */}
         {/* Só aparece se o estado isMobileMenuOpen for verdadeiro */}
+        {/* MENU MÓVEL (OVERLAY) */}
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 bg-black z-40 flex flex-col items-center justify-center space-y-8 text-2xl font-bold text-white md:hidden animate-in fade-in zoom-in duration-300">
+          <div className="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center space-y-6 animate-in fade-in zoom-in duration-300">
+            {/*
+                MUDANÇAS FEITAS:
+                1. bg-black/95: Fundo quase opaco para ler melhor.
+                2. text-lg (em vez de 2xl): Tamanho mais discreto.
+                3. font-medium (em vez de bold): Menos agressivo.
+                4. tracking-widest: O segredo do luxo (letras mais espaçadas).
+             */}
             <Link
               href="/catalog"
-              onClick={() => setIsMobileMenuOpen(false)} // Fecha o menu ao clicar
+              className="text-lg font-medium tracking-widest text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               CATÁLOGO
             </Link>
-            <Link href="/about" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link
+              href="/about"
+              className="text-lg font-medium tracking-widest text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               SOBRE
             </Link>
-            <Link href="/cart" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link
+              href="/cart"
+              className="text-lg font-medium tracking-widest text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               CARRINHO (<span suppressHydrationWarning>{totalItems}</span>)
             </Link>
           </div>
