@@ -37,13 +37,13 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* INFORMAÇÕES */}
       <div className="space-y-1">
-        <p className="text-xs text-gray-500 uppercase tracking-wider">
+        <p className="text-xs text-gray-300 uppercase tracking-wider">
           {product.category}
         </p>
         <h3 className="text-lg font-medium text-white group-hover:text-gray-300 transition-colors">
           {product.name}
         </h3>
-        <p className="text-gray-400 font-light">{formatPrice(product.price)}</p>
+        <p className="text-gray-300 font-light">{formatPrice(product.price)}</p>
       </div>
     </Link>
   );
