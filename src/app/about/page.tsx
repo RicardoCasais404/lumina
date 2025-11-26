@@ -54,7 +54,7 @@ export default function AboutPage() {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <h2 className="text-white text-3xl font-bold tracking-widest border-2 border-white px-8 py-4">
+          <h2 className="text-white text-xl md:text-3xl font-bold tracking-widest border-2 border-white px-4 py-2 md:px-8 md:py-4 text-center">
             ESTÚDIO LUMINA
           </h2>
         </div>
