@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -44,16 +45,18 @@ export default function Hero() {
         </motion.p>
 
         {/* Botão de Ação */}
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          whileHover={{ scale: 1.05 }} // Efeito ao passar o rato
-          whileTap={{ scale: 0.95 }} // Efeito ao clicar
-          className="px-8 py-4 bg-white text-black text-lg font-bold tracking-wide rounded-full hover:bg-gray-200 transition-colors"
-        >
-          VER COLEÇÃO
-        </motion.button>
+        <Link href="/catalog">
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-4 bg-white text-black text-lg font-bold tracking-wide rounded-full hover:bg-gray-200 transition-colors"
+          >
+            VER COLEÇÃO
+          </motion.button>
+        </Link>
       </div>
     </section>
   );

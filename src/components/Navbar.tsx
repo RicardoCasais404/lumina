@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCartStore } from "@/store/useCartStore";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react"; // <--- ADICIONEI O ShoppingBag
 
 export default function Navbar() {
   const items = useCartStore((state) => state.items);
@@ -11,7 +11,7 @@ export default function Navbar() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Bloquear o scroll da página quando o menu está aberto
+  // Bloquear scroll quando menu abre
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -22,7 +22,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 1. BARRA DE NAVEGAÇÃO (A que está sempre visível) */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-black/50 backdrop-blur-md">
         <div className="flex items-center justify-between p-6 px-6 md:px-10">
           {/* LOGÓTIPO */}
@@ -33,8 +32,8 @@ export default function Navbar() {
             LUMINA
           </Link>
 
-          {/* MENU PC (Links normais) */}
-          <div className="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+          {/* MENU PC */}
+          <div className="hidden md:flex gap-8 text-sm font-medium text-gray-300 items-center">
             <Link
               href="/catalog"
               className="hover:text-white transition-colors"
@@ -44,12 +43,18 @@ export default function Navbar() {
             <Link href="/about" className="hover:text-white transition-colors">
               SOBRE
             </Link>
-            <Link href="/cart" className="hover:text-white transition-colors">
-              CARRINHO (<span suppressHydrationWarning>{totalItems}</span>)
+
+            {/* LINK DO CARRINHO COM ÍCONE */}
+            <Link
+              href="/cart"
+              className="hover:text-white transition-colors flex items-center gap-2"
+            >
+              <span>CARRINHO ({totalItems})</span>
+              <ShoppingBag size={18} />
             </Link>
           </div>
 
-          {/* BOTÃO HAMBÚRGUER (Só aparece se o menu estiver FECHADO) */}
+          {/* BOTÃO HAMBÚRGUER */}
           <div className="md:hidden">
             {!isMobileMenuOpen && (
               <button
@@ -63,11 +68,9 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* 2. O MENU MÓVEL (Painel Gigante que cobre TUDO) */}
-      {/* Este bloco está FORA da <nav> visual para não haver conflitos */}
+      {/* MENU MÓVEL (Full Screen) */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-black z-100 flex flex-col items-center justify-center animate-in fade-in duration-200">
-          {/* Botão de Fechar (No canto superior direito deste painel preto) */}
           <button
             className="absolute top-6 right-6 text-white p-2"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -75,7 +78,6 @@ export default function Navbar() {
             <X size={32} />
           </button>
 
-          {/* LINKS DO MENU */}
           <div className="flex flex-col items-center space-y-12">
             <Link
               href="/catalog"
@@ -95,10 +97,11 @@ export default function Navbar() {
 
             <Link
               href="/cart"
-              className="text-2xl font-light tracking-[0.2em] text-white hover:text-gray-400"
+              className="text-2xl font-light tracking-[0.2em] text-white hover:text-gray-400 flex items-center gap-3"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              CARRINHO ({totalItems})
+              <span>CARRINHO ({totalItems})</span>
+              <ShoppingBag size={24} />
             </Link>
           </div>
         </div>
