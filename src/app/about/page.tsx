@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Leaf, Hammer, Sparkles } from "lucide-react"; // <--- Importamos os ícones aqui
 
 export default function AboutPage() {
   return (
@@ -15,8 +16,12 @@ export default function AboutPage() {
 
       {/* SECÇÃO DE VALORES */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
-        <div className="bg-gray-900/50 p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
-          <div className="text-4xl mb-4">✨</div>
+        {/* CARD 1: Design */}
+        <div className="bg-gray-900/50 p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-colors flex flex-col items-center text-center">
+          <div className="mb-6 p-4 bg-white/5 rounded-full text-white">
+            {/* Ícone Sparkles (Brilho/Elegância) com traço fino */}
+            <Sparkles size={32} strokeWidth={1.5} />
+          </div>
           <h3 className="text-xl font-bold text-white mb-3">
             Design Intemporal
           </h3>
@@ -25,8 +30,13 @@ export default function AboutPage() {
             elegantes daqui a 50 anos.
           </p>
         </div>
-        <div className="bg-gray-900/50 p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
-          <div className="text-4xl mb-4">🌿</div>
+
+        {/* CARD 2: Sustentabilidade */}
+        <div className="bg-gray-900/50 p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-colors flex flex-col items-center text-center">
+          <div className="mb-6 p-4 bg-white/5 rounded-full text-white">
+            {/* Ícone Leaf (Folha) */}
+            <Leaf size={32} strokeWidth={1.5} />
+          </div>
           <h3 className="text-xl font-bold text-white mb-3">
             Sustentabilidade
           </h3>
@@ -35,8 +45,13 @@ export default function AboutPage() {
             que respeitam o planeta.
           </p>
         </div>
-        <div className="bg-gray-900/50 p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
-          <div className="text-4xl mb-4">🛠️</div>
+
+        {/* CARD 3: Artesanato */}
+        <div className="bg-gray-900/50 p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-colors flex flex-col items-center text-center">
+          <div className="mb-6 p-4 bg-white/5 rounded-full text-white">
+            {/* Ícone Hammer (Martelo/Trabalho Manual) */}
+            <Hammer size={32} strokeWidth={1.5} />
+          </div>
           <h3 className="text-xl font-bold text-white mb-3">Artesanato</h3>
           <p className="text-gray-400">
             Cada candeeiro é finalizado à mão pelos nossos artesãos
@@ -48,7 +63,7 @@ export default function AboutPage() {
       {/* IMAGEM FINAL (AMBIENTE) */}
       <div className="max-w-7xl mx-auto relative h-[60vh] rounded-3xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
         <Image
-          src="/products/1.jpg" // Reutilizamos uma imagem que já tens
+          src="/products/1.jpg"
           alt="Lumina Studio"
           fill
           className="object-cover"
